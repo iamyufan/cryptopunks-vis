@@ -5,9 +5,11 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 import json
-import io
-import base64
-from PIL import Image
+
+from utils import (
+    get_vis1_fig,
+    get_vis3_fig,
+)
 
 
 # PATHs
@@ -30,68 +32,30 @@ VIS_DATA_PATH = '../vis_data'
 TWEET_PATH = '../tweets'
 
 # -------------------- Visualization Figures --------------------
-# Vis1 - Sankey Diagram
+# Vis1 - Sankey Diagram --------------------
 # dataset for vis1
 data1 = json.load(open(VIS_DATA_PATH + '/vis1_data.json'))
 
-
-
 # fig for vis1
-fig1 = go.Figure(data=[go.Sankey(
-    valueformat=".0f",
-    valuesuffix=" punks",
-    # Define nodes
-    node=dict(
-        pad=15,
-        thickness=15,
-        line=dict(color="black", width=0.5),
-        label=data1['node']['name'],
-        color=data1["node"]['color'],
-    ),
-    # Add links
-    link=dict(
-        source=data1['link']['source'],
-        target=data1['link']['target'],
-        value=data1['link']['value'],
-        color=data1['link']['color'],
-    ))])
+fig1 = get_vis1_fig(data1)
+
+fig1.update_layout(
+    plot_bgcolor='rgba(255,255,255,0.1)',
+    width=1000,
+    height=600,
+)
 
 
-# Vis3 - Bubble Chart
+# Vis3 - Bubble Chart --------------------
 # dataset for vis3
-df3 = pd.read_csv('{}/vis3_data.csv'.format(VIS_DATA_PATH),
-                  header=0, index_col=0)
+data3 = pd.read_csv('{}/vis3_data.csv'.format(VIS_DATA_PATH),
+                    header=0, index_col=0)
 
 # df3 = df3[df3['date'] > '2021-01-01']
-df3 = df3[df3['price'] < 700]
-
-colorsIdx = {'Dark': '#A4031F', 'Medium': '#DB9065',
-             'Light': '#F2A359', 'Albino': '#F2DC5D',
-             'Non-human': '#8DFFCD'}
-
-trace_list = []
-for sc in ['Non-human', 'Albino', 'Light', 'Medium', 'Dark']:
-    df3_temp = df3[df3['punk_skin_tone'] == sc]
-    cols = df3_temp['punk_skin_tone'].map(colorsIdx),
-    trace = go.Scatter(
-        x=df3_temp['date'],
-        y=df3_temp['price'],
-        name='SKIN TONE: {}'.format(sc),
-        mode="markers",
-        marker=dict(
-            color=colorsIdx[sc],
-            size=df3_temp["bubble_size"],
-            line={"width": 0},
-            sizeref=1.5,
-            sizemode="diameter",
-            opacity=0.8,
-        )
-    )
-    trace_list.append(trace)
-    
+data3 = data3[data3['price'] < 700]
 
 # fig for vis3
-fig3 = go.Figure(data = trace_list)
+fig3 = get_vis3_fig(data3)
 
 # turn off native plotly.js hover effects - make sure to use
 # hoverinfo="none" rather than "skip" which also halts events.
@@ -109,37 +73,58 @@ fig3.update_layout(
 # -------------------- App --------------------
 # Build the app
 app = Dash(__name__)
-app.layout = html.Div(children=[
-    # vis1
-    html.Div(children=[
-        html.H1(children='Visualization 1'),
+app.layout = html.Div([
+    # Banner display
+    html.Div(
+        className="header-title",
+        children=[
+            html.H1(
+                id="title",
+                children="On Ethics of Ethereum NFT",
+            ),
+            # html.Div(
+            #     id="learn_more",
+            #     children=[
+            #         html.Img(className="logo",
+            #                  src=app.get_asset_url("logo.png"))
+            #     ],
+            # ),
+        ],
+    ),
+    # Visualization grid
+    html.Div(
+        id="grid",
+        children=[
+            # vis1
+            html.Div(children=[
+                html.H2(children='Visualization 1'),
 
-        html.Div(children='''
-        Example chart.
-        '''
-                 ),
+                html.Div(children='Sankey Diagram.'),
 
-        dcc.Graph(
-            id='graph-1',
-            figure=fig1
-        )
-    ]),
+                dcc.Graph(id="graph-1",
+                          className="div-card", figure=fig1),
+                # dcc.Graph(
+                #     id='graph-1',
+                #     figure=fig1
+                # )
+            ]),
 
-    # vis3
-    html.Div(children=[
-        html.H1(children='Visualization 3'),
+            # vis3
+            html.Div(children=[
+                html.H2(children='Visualization 3'),
 
-        html.Div(children='''
-        Bubble chart.
-        '''
-                 ),
+                html.Div(children='Bubble Chart.'),
+                
+                dcc.Graph(id="graph-3", className="div-card",
+                          figure=fig3),
+                # dcc.Graph(
+                #     id='graph-3',
+                #     figure=fig3
+                # ),
+                dcc.Tooltip(id="graph-tooltip"),
+            ])
 
-        dcc.Graph(
-            id='graph-3',
-            figure=fig3
-        ),
-        dcc.Tooltip(id="graph-tooltip"),
-    ])
+        ]),
 ])
 
 # Define callback to update graph
@@ -161,20 +146,16 @@ def display_hover(hoverData):
     bbox = pt["bbox"]
     num = pt["pointNumber"]
 
-    df_row = df3.iloc[num]
+    df_row = data3.iloc[num]
     img_src = df_row['img_url']
     punk_id = df_row['punk_id']
     tx_date = df_row['date']
-    from_address = df_row['from_address']
-    to_address = df_row['to_address']
 
     children = [
         html.Div([
             html.Img(src=img_src, style={"width": "100%"}),
             html.P(f"Punk ID: {punk_id}", style={"color": "#3347D7"}),
             html.P(f"Date: {tx_date}", style={"color": "#8BD6EA"}),
-            # html.P(f"Seller address: {from_address}"),
-            # html.P(f"Buyer address: {to_address}"),
         ], style={'width': '200px', 'white-space': 'normal'})
     ]
 
