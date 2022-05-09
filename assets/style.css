@@ -512,8 +512,8 @@ body, h1, h2, h3, h4, h5, h6, p {
     grid-row: 3 / 4;
   }
 
-  #histo-graph {
-    -ms-grid-column: 8;
+  #graph-4 {
+    -ms-grid-column: 16;
     -ms-grid-column-span: 5;
     grid-column: 8 / span 5;
     -ms-grid-row: 4;

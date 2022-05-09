@@ -1,4 +1,5 @@
 
+from torch import layout
 from dash import Dash, dcc, html, Input, Output, no_update
 import plotly.graph_objects as go
 import plotly.express as px
@@ -30,8 +31,8 @@ def get_vis1_fig(data):
 
 def get_vis3_fig(data):
     colorsIdx = {'Dark': '#A4031F', 'Medium': '#DB9065',
-                'Light': '#F2A359', 'Albino': '#F2DC5D',
-                'Non-human': '#8DFFCD'}
+                 'Light': '#F2A359', 'Albino': '#F2DC5D',
+                 'Non-human': '#8DFFCD'}
 
     trace_list = []
     for sc in ['Non-human', 'Albino', 'Light', 'Medium', 'Dark']:
@@ -52,7 +53,33 @@ def get_vis3_fig(data):
             )
         )
         trace_list.append(trace)
-        
-    fig3 = go.Figure(data = trace_list)
-    
+
+    fig3 = go.Figure(data=trace_list)
+
     return fig3
+
+
+def get_vis4_fig(data):
+
+    f = go.Figure(data=data,
+                  layout=go.Layout(
+                      title='<br>Network Graph of CryptoPunks Transactions in 2021',
+                      titlefont=dict(size=20, family='PT Sans Narrow'),
+                      showlegend=True,
+                      plot_bgcolor='rgba(255,255,255,0.1)',
+                      hovermode='closest',
+                      width=880,
+                      height=800,
+                      margin=dict(b=20, l=5, r=5, t=40),
+                    #   annotations=[dict(
+                    #         showarrow=False,
+                    #         xref="paper", yref="paper",
+                    #         x=0.005, y=-0.002)],
+                      xaxis=dict(showgrid=False, zeroline=False,
+                                 showticklabels=False),
+                      yaxis=dict(showgrid=False, zeroline=False,
+                                 showticklabels=False)
+                  )
+                  )
+    # print('>>>>> fig created')
+    return f
