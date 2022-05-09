@@ -71,10 +71,10 @@ def get_vis4_fig(data):
                       width=880,
                       height=800,
                       margin=dict(b=20, l=5, r=5, t=40),
-                    #   annotations=[dict(
-                    #         showarrow=False,
-                    #         xref="paper", yref="paper",
-                    #         x=0.005, y=-0.002)],
+                      annotations=[dict(
+                            showarrow=False,
+                            xref="paper", yref="paper",
+                            x=0.005, y=-0.002)],
                       xaxis=dict(showgrid=False, zeroline=False,
                                  showticklabels=False),
                       yaxis=dict(showgrid=False, zeroline=False,
@@ -83,3 +83,17 @@ def get_vis4_fig(data):
                   )
     # print('>>>>> fig created')
     return f
+
+def get_vis5_fig(sent_year_df):
+    years=['2017', '2018', '2019', '2020', '2021', '2022']
+    sents=['neg', 'neu', 'pos']
+
+    fig = go.Figure(data=[
+        go.Bar(name='Negative', x=years, y=sent_year_df['Negative'], marker=dict(color='#4B3F72')),
+        go.Bar(name='Neutral', x=years, y=sent_year_df['Neutral'], marker=dict(color='#FFC857')),
+        go.Bar(name='Positive', x=years, y=sent_year_df['Positive'], marker=dict(color='#119DA4')),
+    ])
+    # Change the bar mode
+    fig.update_layout(barmode='stack')
+    
+    return fig

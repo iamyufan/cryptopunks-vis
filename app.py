@@ -6,6 +6,9 @@ import plotly.express as px
 import pandas as pd
 import json
 import pickle
+from PIL import Image
+import io
+import base64
 
 from utils import (
     get_vis1_fig,
@@ -64,10 +67,62 @@ fig3.update_layout(
 
 # Vis4 - Network Visualization --------------------
 # dataset for vis4
-data4 = pickle.load(open(VIS_DATA_PATH + '/vis4_data.pkl', 'rb'))
+data4_2022 = pickle.load(open(VIS_DATA_PATH + '/vis4_data_2022.pkl', 'rb'))
+data4_2021 = pickle.load(open('{}/vis4_data_{}.pkl'.format(VIS_DATA_PATH, '2021'), 'rb'))
+data4_2020 = pickle.load(open('{}/vis4_data_{}.pkl'.format(VIS_DATA_PATH, '2020'), 'rb'))
+data4_2019 = pickle.load(open('{}/vis4_data_{}.pkl'.format(VIS_DATA_PATH, '2019'), 'rb'))
+data4_2018 = pickle.load(open('{}/vis4_data_{}.pkl'.format(VIS_DATA_PATH, '2018'), 'rb'))
+data4_2017 = pickle.load(open('{}/vis4_data_{}.pkl'.format(VIS_DATA_PATH, '2017'), 'rb'))
+
 
 # fig for vis4
-fig4 = get_vis4_fig(data4)
+fig4 = get_vis4_fig(data4_2022)
+
+# fig4.update_layout(
+#     updatemenus=[
+#         dict(
+#             type="buttons",
+#             direction="right",
+#             x=0.7,
+#             y=1.2,
+#             showactive=True,
+#             buttons=list(
+#                 [
+#                     dict(
+#                         label="2022",
+#                         method="update",
+#                         args=[{"data": data4_2022}],
+#                     ),
+#                     dict(
+#                         label="2021",
+#                         method="update",
+#                         args=[{"data": data4_2021}],
+#                     ),
+#                     dict(
+#                         label="2020",
+#                         method="update",
+#                         args=[{"data": data4_2020}],
+#                     ),
+#                     dict(
+#                         label="2019",
+#                         method="update",
+#                         args=[{"data": data4_2019}],
+#                     ),
+#                     dict(
+#                         label="2018",
+#                         method="update",
+#                         args=[{"data": data4_2018}],
+#                     ),
+#                     dict(
+#                         label="2017",
+#                         method="update",
+#                         args=[{"data": data4_2017}],
+#                     ),
+#                 ]
+#             ),
+#         )
+#     ]
+# )
 
 
 
@@ -151,18 +206,27 @@ def display_hover(hoverData):
     pt = hoverData["points"][0]
     bbox = pt["bbox"]
     num = pt["pointNumber"]
-
+    
     df_row = data3.iloc[num]
-    img_src = df_row['img_url']
+    # img_src = df_row['img_url']
     punk_id = df_row['punk_id']
     tx_date = df_row['date']
+    
+    
+    image_path = './data/punk_imgs/{}.png'.format(punk_id)
+    im = Image.open(image_path)
+    buffer = io.BytesIO()
+    im.save(buffer, format="png")
+    encoded_image = base64.b64encode(buffer.getvalue()).decode()
+    im_url = "data:image/png;base64, " + encoded_image
+
 
     children = [
         html.Div([
-            html.Img(src=img_src, style={"width": "100%"}),
-            html.P(f"Punk ID: {punk_id}", style={"color": "#3347D7"}),
-            html.P(f"Date: {tx_date}", style={"color": "#8BD6EA"}),
-        ], style={'width': '200px', 'white-space': 'normal'})
+            html.Img(src=im_url, style={"width": "100%"}),
+            html.P(f"Punk ID: {punk_id}", style={"color": "black"}),
+            html.P(f"{tx_date}", style={"color": "grey"}),
+        ], style={'width': '100px', 'white-space': 'normal'})
     ]
 
     return True, bbox, children

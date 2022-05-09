@@ -2303,7 +2303,7 @@ punk_id,type,gender,skin_tone,attr_count,attributes,skin_tone_color,avg_price,im
 2301,Human,Male,Medium,3,"['Hoodie', 'Front Beard Dark', 'Eye Patch']",#DB9065,5.0,https://www.larvalabs.com/cryptopunks/cryptopunk2301.png
 2302,Human,Male,Medium,2,"['Peak Spike', 'Chinstrap']",#DB9065,13.6375,https://www.larvalabs.com/cryptopunks/cryptopunk2302.png
 2303,Human,Male,Medium,3,"['Chinstrap', 'Fedora', 'Small Shades']",#DB9065,17.388333333333332,https://www.larvalabs.com/cryptopunks/cryptopunk2303.png
-2304,Human,Male,Albino,3,"['Crazy Hair', 'Regular Shades', 'Big Beard']",#F2DC5D,0.36444444444444446,https://www.larvalabs.com/cryptopunks/cryptopunk2304.png
+2304,Human,Male,Albino,3,"['Crazy Hair', 'Regular Shades', 'Big Beard']",#F2DC5D,0.3644444444444444,https://www.larvalabs.com/cryptopunks/cryptopunk2304.png
 2305,Human,Female,Light,2,"['Frumpy Hair', 'Cigarette']",#F2A359,0.0,https://www.larvalabs.com/cryptopunks/cryptopunk2305.png
 2306,Zombie,Male,Non-human,3,"['Cigarette', 'Mohawk Thin', 'Earring']",#8DFFCD,293.0,https://www.larvalabs.com/cryptopunks/cryptopunk2306.png
 2307,Human,Male,Dark,2,"['Cap', 'Frown']",#A4031F,0.41,https://www.larvalabs.com/cryptopunks/cryptopunk2307.png
@@ -3610,7 +3610,7 @@ punk_id,type,gender,skin_tone,attr_count,attributes,skin_tone_color,avg_price,im
 3608,Human,Female,Dark,3,"['Mohawk Thin', 'Purple Lipstick', 'Nerd Glasses']",#A4031F,1.295,https://www.larvalabs.com/cryptopunks/cryptopunk3608.png
 3609,Zombie,Male,Non-human,2,"['Earring', 'Do-rag']",#8DFFCD,369.0,https://www.larvalabs.com/cryptopunks/cryptopunk3609.png
 3610,Human,Female,Medium,3,"['Mole', 'Hot Lipstick', 'Stringy Hair']",#DB9065,7.5,https://www.larvalabs.com/cryptopunks/cryptopunk3610.png
-3611,Human,Male,Light,2,"['Messy Hair', 'Nerd Glasses']",#F2A359,0.22559553397315796,https://www.larvalabs.com/cryptopunks/cryptopunk3611.png
+3611,Human,Male,Light,2,"['Messy Hair', 'Nerd Glasses']",#F2A359,0.2255955339731579,https://www.larvalabs.com/cryptopunks/cryptopunk3611.png
 3612,Human,Male,Medium,3,"['Cigarette', 'Cap Forward', 'Earring']",#DB9065,4.863333333333333,https://www.larvalabs.com/cryptopunks/cryptopunk3612.png
 3613,Human,Male,Light,4,"['Messy Hair', 'Clown Eyes Blue', 'Luxurious Beard', 'Earring']",#F2A359,4.0,https://www.larvalabs.com/cryptopunks/cryptopunk3613.png
 3614,Human,Male,Medium,2,"['Hoodie', 'Shadow Beard']",#DB9065,3.4766666666666666,https://www.larvalabs.com/cryptopunks/cryptopunk3614.png
