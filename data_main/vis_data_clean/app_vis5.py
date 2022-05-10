@@ -13,9 +13,9 @@ years=['2017', '2018', '2019', '2020', '2021', '2022']
 sents=['neg', 'neu', 'pos']
 
 fig = go.Figure(data=[
-    go.Bar(name='Negative', x=years, y=sent_year_df['neg'], marker=dict(color='#E00000')),
-    go.Bar(name='Neutral', x=years, y=sent_year_df['neu'], marker=dict(color='#FFBA08')),
-    go.Bar(name='Positive', x=years, y=sent_year_df['pos'], marker=dict(color='#3F88C5')),
+    go.Bar(name='Negative', x=years, y=sent_year_df['neg'], marker=dict(color='#78C1E2')),
+    go.Bar(name='Neutral', x=years, y=sent_year_df['neu'], marker=dict(color='#52CB8B')),
+    go.Bar(name='Positive', x=years, y=sent_year_df['pos'], marker=dict(color='#FAC261')),
 ])
 # Change the bar mode
 fig.update_layout(barmode='stack', legend=dict(
@@ -89,13 +89,13 @@ def display_hover(hoverData):
     Sent = ''
     if sent == 'neg':
         Sent = 'Negative'
-        font_color = '#E00000'
+        font_color = 'blue'
     elif sent == 'neu':
         Sent = 'Neutral'
-        font_color = '#FFBA08'
+        font_color = 'green'
     elif sent == 'pos':
         Sent = 'Positive'
-        font_color = '#3F88C5'
+        font_color = 'orange'
     
     image_path = '../../data/vis5/{}_{}.png'.format(year, sent)
     im = Image.open(image_path)

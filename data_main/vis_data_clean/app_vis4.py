@@ -27,7 +27,7 @@ app.layout = html.Div([
                 } for i in mgr_options],
                 value='2022'),
         ],
-        style={'width': '50%',
+        style={'width': '8%',
                'display': 'inline-block'}),
     dcc.Graph(id='funnel-graph'),
 ])
