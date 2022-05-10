@@ -1,17 +1,11 @@
 # -------------------- Setting --------------------
 
-from tkinter import font
-
-from click import style
 from dash import Dash, dcc, html, Input, Output, no_update
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 import json
-import pickle
-from PIL import Image
-import io
-import base64
+
 
 def get_vis1_fig(data):
     fig1 = go.Figure(data=[go.Sankey(
