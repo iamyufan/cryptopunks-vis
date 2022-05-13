@@ -6,6 +6,8 @@ A Glance into NFT Ethics: On Ethics of CryptoPunk
 
 > Authors: Yufan Zhang and Zichao Chen
 
+![1652455511555.png](poster.png)
+
 ## Repo structure
 
 ```
@@ -54,7 +56,6 @@ project
 │       │   tweets_db.csv
 │       │   tx_db.csv
 ```
-
 
 ## How to use
 
