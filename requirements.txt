@@ -80,7 +80,7 @@ pandas==1.4.2
 parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
 pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work
 pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
-Pillow==9.1.0
+Pillow==9.1.1
 platformdirs==2.5.2
 plotly @ file:///opt/conda/conda-bld/plotly_1646671701182/work
 pptree==3.1
