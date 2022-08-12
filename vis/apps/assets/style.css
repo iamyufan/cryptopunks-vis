@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Red+Hat+Display:wght@900&display=swap');
+
+.header { 
+    grid-area: header; 
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    color: rgb(52, 170, 244);
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+.title { 
+    grid-area: right; 
+    background-color: rgb(255, 255, 255);
+    width: 200px;
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.title h2 { 
+    margin-top: 200px;
+    font-size: 1.5em;
+    color: rgb(136, 136, 136);
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+.graph { 
+    grid-area: left; 
+    width: 90%;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'left   right';
+    grid-gap: 10px;
+    padding: 10px;
+}
