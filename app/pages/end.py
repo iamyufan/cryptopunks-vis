@@ -1,9 +1,5 @@
-from pydoc import classname
-from dash import dcc, html, Input, Output, callback
-import pandas as pd
-import plotly.express as px
+from dash import html
 from pages import common
-from pages.common import nav
 
 links = [
     {'name': '	arXiv:2206.12922',

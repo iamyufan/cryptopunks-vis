@@ -1,4 +1,4 @@
-from dash import dcc, html, Input, Output, callback
+from dash import html
 
 base_url = "/cryptopunks"
 
